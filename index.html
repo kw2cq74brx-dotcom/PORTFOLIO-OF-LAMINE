@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2302040D%22/><text x=%2250%22 y=%2266%22 font-size=%2255%22 font-family=%22sans-serif%22 font-weight=%22800%22 fill=%22%23246BFF%22 text-anchor=%22middle%22>L</text></svg>">
 </head>
 <body>
@@ -43,6 +44,7 @@
   <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></symbol>
   <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
   <symbol id="icon-rss" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></symbol>
+  <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
 </svg>
 
 <!-- ============================================================
@@ -70,7 +72,7 @@
      ============================================================ -->
 <header class="site-header" id="siteHeader">
   <div class="container">
-    <a href="#accueil" class="logo"><span class="dot"></span> Lamine<span class="gradient-text-accent">.</span></a>
+    <a href="#accueil" class="logo"><span class="dot"></span> BLG<span class="gradient-text-accent">.</span></a>
 
     <nav class="nav-desktop" id="navDesktop">
       <a href="#accueil" class="nav-link active" data-nav>Accueil</a>
@@ -158,8 +160,8 @@
       <div class="hero-visual" data-reveal="scale">
         <div class="hero-photo-frame">
           <div class="hero-photo-inner">
-            <!-- Remplacer par : <img src="assets/img/profile.jpg" alt="Photo de Lamine"> -->
-            <div class="avatar-fallback gradient-text">L</div>
+            <img src="assets/img/profile.jpg" alt="Photo de Lamine">
+            <div class="avatar-fallback gradient-text">BLG</div>
           </div>
         </div>
         <div class="hero-badge">
@@ -186,8 +188,8 @@
       <div class="about-photo" data-reveal="left">
         <div class="about-photo-frame">
           <div class="about-photo-inner">
-            <!-- Remplacer par : <img src="assets/img/profile.jpg" alt="Photo de Lamine"> -->
-            <div class="avatar-fallback gradient-text">L</div>
+            <img src="assets/img/profile.jpg" alt="Photo de Lamine">
+            <div class="avatar-fallback gradient-text">BLG</div>
           </div>
         </div>
       </div>
@@ -197,7 +199,7 @@
         <h2 class="gradient-text" data-reveal style="margin: 14px 0 26px;">À propos de moi</h2>
 
         <p data-reveal>
-          Je m'appelle <strong>Lamine</strong>, étudiant en <strong>BTS Services Informatiques aux Organisations,
+          Je m'appelle <strong> Baye Lamine GUEYE</strong>, étudiant en <strong>BTS Services Informatiques aux Organisations,
           option SLAM</strong> (Solutions Logicielles et Applications Métiers) à My Digital School, Paris.
           Curieux et rigoureux, j'aime comprendre les problématiques métiers pour y répondre par des solutions
           logicielles solides, du cahier des charges jusqu'à la mise en production.
@@ -621,9 +623,14 @@
             Une question, une opportunité de stage ou un projet à me proposer ? N'hésitez pas à me
             contacter directement par mail, téléphone ou WhatsApp — je réponds rapidement.
           </p>
-          <a href="#" class="btn btn-primary" data-config-href="whatsappLink" target="_blank" rel="noopener noreferrer">
-            Discuter sur WhatsApp <svg><use href="#icon-whatsapp"/></svg>
-          </a>
+          <div class="contact-cta-row">
+            <a href="#" class="btn btn-primary" data-config-href="whatsappLink" target="_blank" rel="noopener noreferrer">
+              Discuter sur WhatsApp <svg><use href="#icon-whatsapp"/></svg>
+            </a>
+            <button type="button" class="btn btn-ghost" id="downloadCvBtn">
+              Download CV <svg><use href="#icon-download"/></svg>
+            </button>
+          </div>
         </div>
 
         <div class="contact-cards">

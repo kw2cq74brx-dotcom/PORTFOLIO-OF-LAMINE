@@ -9,6 +9,7 @@
    -------------------------------------------------------------------------- */
 const CONFIG = {
   fullName: "Lamine",
+  role: "Développeur Web Full-Stack",
   email: "contact@example.com",
   phone: "+33 7 59 06 20 43",
 
@@ -338,6 +339,177 @@ function initTilt() {
 }
 
 /* --------------------------------------------------------------------------
+   15.5 CV GENERATION — build a PDF live from the page's own content
+   -------------------------------------------------------------------------- */
+function textFrom(scope, selector) {
+  const el = scope.querySelector(selector);
+  return el ? el.textContent.trim().replace(/\s+/g, " ") : "";
+}
+
+function listFrom(scope, selector) {
+  return Array.from(scope.querySelectorAll(selector))
+    .map((el) => el.textContent.trim().replace(/\s+/g, " "))
+    .join(", ");
+}
+
+function generateCvPdf() {
+  if (!window.jspdf) {
+    alert("Le générateur de CV est en cours de chargement, réessayez dans un instant.");
+    return;
+  }
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const marginX = 48;
+  const maxWidth = pageWidth - marginX * 2;
+  let y = 56;
+
+  const accent = [36, 107, 255];
+  const dark = [20, 22, 40];
+  const gray = [95, 100, 120];
+
+  function ensureSpace(h) {
+    if (y + h > pageHeight - 48) {
+      doc.addPage();
+      y = 56;
+    }
+  }
+
+  function sectionTitle(title) {
+    ensureSpace(34);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.setTextColor(...accent);
+    doc.text(title.toUpperCase(), marginX, y);
+    y += 6;
+    doc.setDrawColor(...accent);
+    doc.setLineWidth(1);
+    doc.line(marginX, y, pageWidth - marginX, y);
+    y += 18;
+  }
+
+  function paragraph(text, { size = 9.5, color = gray, gap = 13, bold = false } = {}) {
+    if (!text) return;
+    doc.setFont("helvetica", bold ? "bold" : "normal");
+    doc.setFontSize(size);
+    doc.setTextColor(...color);
+    doc.splitTextToSize(text, maxWidth).forEach((line) => {
+      ensureSpace(gap);
+      doc.text(line, marginX, y);
+      y += gap;
+    });
+  }
+
+  function entryHeader(title, period) {
+    ensureSpace(15);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10.5);
+    doc.setTextColor(...dark);
+    doc.text(title, marginX, y);
+    if (period) {
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor(...accent);
+      doc.text(period, pageWidth - marginX, y, { align: "right" });
+    }
+    y += 14;
+  }
+
+  // ---- Header ----
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(24);
+  doc.setTextColor(...dark);
+  doc.text(CONFIG.fullName.toUpperCase(), marginX, y);
+  y += 20;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+  doc.setTextColor(...accent);
+  doc.text(CONFIG.role, marginX, y);
+  y += 18;
+
+  paragraph([CONFIG.email, CONFIG.phone, CONFIG.linkedin, CONFIG.github].filter(Boolean).join("   |   "), {
+    size: 9,
+    gap: 12
+  });
+
+  y += 10;
+  doc.setDrawColor(...accent);
+  doc.setLineWidth(1.4);
+  doc.line(marginX, y, pageWidth - marginX, y);
+  y += 24;
+
+  // ---- Profil (À propos) ----
+  const aboutEl = document.getElementById("apropos");
+  if (aboutEl) {
+    sectionTitle("Profil");
+    const aboutText = Array.from(aboutEl.querySelectorAll(".about-text > p"))
+      .map((p) => p.textContent.trim().replace(/\s+/g, " "))
+      .join(" ");
+    paragraph(aboutText, { gap: 12.5 });
+    y += 8;
+  }
+
+  // ---- Formations ----
+  const formationsEl = document.getElementById("formations");
+  if (formationsEl) {
+    sectionTitle("Formations");
+    formationsEl.querySelectorAll(".timeline-item").forEach((item) => {
+      entryHeader(textFrom(item, ".tl-title"), textFrom(item, ".tl-period"));
+      paragraph(textFrom(item, ".tl-meta"), { size: 9, bold: true, gap: 12 });
+      paragraph(textFrom(item, ".tl-desc"), { size: 9, gap: 12 });
+      y += 8;
+    });
+  }
+
+  // ---- Compétences ----
+  const competencesEl = document.getElementById("competences");
+  if (competencesEl) {
+    sectionTitle("Compétences");
+    competencesEl.querySelectorAll(".skill-block").forEach((block) => {
+      entryHeader(textFrom(block, "h3"), "");
+      paragraph(listFrom(block, ".skill-tags span"), { size: 9, gap: 12 });
+      y += 6;
+    });
+  }
+
+  // ---- Expériences professionnelles ----
+  const experiencesEl = document.getElementById("experiences");
+  if (experiencesEl) {
+    sectionTitle("Expériences Professionnelles");
+    experiencesEl.querySelectorAll(".timeline-item").forEach((item) => {
+      entryHeader(textFrom(item, ".tl-title"), textFrom(item, ".tl-period"));
+      paragraph(textFrom(item, ".tl-meta"), { size: 9, bold: true, gap: 12 });
+      paragraph(textFrom(item, ".tl-desc"), { size: 9, gap: 12 });
+      y += 8;
+    });
+  }
+
+  // ---- Projets ----
+  const projetsEl = document.getElementById("projets");
+  if (projetsEl) {
+    sectionTitle("Projets");
+    projetsEl.querySelectorAll(".project-card").forEach((card) => {
+      entryHeader(textFrom(card, "h3"), "");
+      paragraph(textFrom(card, ".project-body > p"), { size: 9, gap: 12 });
+      paragraph(listFrom(card, ".project-tags span"), { size: 8.5, color: accent, gap: 12 });
+      y += 8;
+    });
+  }
+
+  doc.save(`CV-${CONFIG.fullName.replace(/\s+/g, "-")}.pdf`);
+}
+
+function initCvDownload() {
+  const btn = document.getElementById("downloadCvBtn");
+  if (!btn) return;
+  btn.addEventListener("click", generateCvPdf);
+}
+
+/* --------------------------------------------------------------------------
    15. CURSOR HOVER STATE
    -------------------------------------------------------------------------- */
 function initCursorHoverState() {
@@ -372,4 +544,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initMagneticButtons();
   initTilt();
   initCursorHoverState();
+  initCvDownload();
 });
