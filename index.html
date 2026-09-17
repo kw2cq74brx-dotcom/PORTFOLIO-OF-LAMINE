@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lamine — Portfolio BTS SIO SLAM</title>
+<meta name="description" content="Portfolio de Lamine, étudiant BTS SIO option SLAM — développement web, bases de données, gestion du patrimoine informatique et cybersécurité.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%2302040D%22/><text x=%2250%22 y=%2266%22 font-size=%2255%22 font-family=%22sans-serif%22 font-weight=%22800%22 fill=%22%23246BFF%22 text-anchor=%22middle%22>L</text></svg>">
+</head>
+<body>
+
+<!-- ============================================================
+     SVG ICON SPRITE
+     ============================================================ -->
+<svg style="display:none">
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></symbol>
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="icon-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol>
+  <symbol id="icon-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="icon-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="icon-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
+  <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></symbol>
+  <symbol id="icon-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></symbol>
+  <symbol id="icon-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></symbol>
+  <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+  <symbol id="icon-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.1 3 2 6 2s6-.9 6-2v-5"/><path d="M22 10v6"/></symbol>
+  <symbol id="icon-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+  <symbol id="icon-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></symbol>
+  <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89 7 23l5-3 5 3-1.21-9.12"/></symbol>
+  <symbol id="icon-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="icon-rss" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></symbol>
+</svg>
+
+<!-- ============================================================
+     PRELOADER
+     ============================================================ -->
+<div class="preloader" id="preloader">
+  <div class="preloader-mark gradient-text">Lamine</div>
+  <div class="preloader-bar"><span></span></div>
+</div>
+
+<!-- Scroll progress indicator -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Background atmosphere -->
+<div class="bg-atmosphere"></div>
+<div class="bg-grid"></div>
+<div class="grain-overlay"></div>
+
+<!-- Custom cursor -->
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- ============================================================
+     HEADER / NAVIGATION (sommaire)
+     ============================================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="#accueil" class="logo"><span class="dot"></span> Lamine<span class="gradient-text-accent">.</span></a>
+
+    <nav class="nav-desktop" id="navDesktop">
+      <a href="#accueil" class="nav-link active" data-nav>Accueil</a>
+      <a href="#apropos" class="nav-link" data-nav>Profil</a>
+      <a href="#formations" class="nav-link" data-nav>Formations</a>
+      <a href="#competences" class="nav-link" data-nav>Compétences</a>
+      <a href="#veille" class="nav-link" data-nav>Veille</a>
+      <a href="#experiences" class="nav-link" data-nav>Expériences</a>
+      <a href="#projets" class="nav-link" data-nav>Projets</a>
+      <a href="#reseaux" class="nav-link" data-nav>Réseaux</a>
+      <a href="#contact" class="nav-link" data-nav>Contact</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-primary btn-sm">Me contacter <svg><use href="#icon-arrow-right"/></svg></a>
+      <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">
+        <svg class="icon-menu"><use href="#icon-menu"/></svg>
+        <svg class="icon-close"><use href="#icon-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-scrim" id="navScrim"></div>
+<nav class="nav-mobile" id="navMobile">
+  <a href="#accueil" class="nav-link active" data-nav>Accueil</a>
+  <a href="#apropos" class="nav-link" data-nav>Profil</a>
+  <a href="#formations" class="nav-link" data-nav>Formations</a>
+  <a href="#competences" class="nav-link" data-nav>Compétences</a>
+  <a href="#veille" class="nav-link" data-nav>Veille</a>
+  <a href="#experiences" class="nav-link" data-nav>Expériences</a>
+  <a href="#projets" class="nav-link" data-nav>Projets</a>
+  <a href="#reseaux" class="nav-link" data-nav>Réseaux</a>
+  <a href="#contact" class="nav-link" data-nav>Contact</a>
+</nav>
+
+<main>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" id="accueil">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-tag" data-reveal>
+          <span class="ping">🚀</span> Étudiant BTS SIO — Option SLAM
+        </div>
+
+        <h1 data-reveal>
+          <span class="line gradient-text">Baye</span>
+          <span class="line gradient-text">Lamine</span>
+          <span class="line gradient-text-accent">Gueye</span>
+        </h1>
+
+        <div class="hero-role" data-reveal>
+          <span id="typedRole">Développeur Web Full-Stack</span><span class="cursor-bar"></span>
+        </div>
+
+        <p class="hero-lead" data-reveal>
+          Passionné par le développement d'applications, la gestion de bases de données et la cybersécurité,
+          je transforme des besoins métiers en solutions numériques modernes, sécurisées et performantes.
+        </p>
+
+        <div class="hero-actions" data-reveal>
+          <a href="#projets" class="btn btn-primary">Voir mes projets <svg><use href="#icon-arrow-right"/></svg></a>
+          <a href="#contact" class="btn btn-ghost">Me contacter</a>
+        </div>
+
+        <div class="hero-stats" data-reveal>
+          <div class="stat">
+            <div class="stat-num"><span data-counter="3">0</span>+</div>
+            <div class="stat-label">Formations</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num"><span data-counter="4">0</span></div>
+            <div class="stat-label">Pôles de compétences</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num"><span data-counter="2">0</span></div>
+            <div class="stat-label">Projets clés</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal="scale">
+        <div class="hero-photo-frame">
+          <div class="hero-photo-inner">
+            <!-- Remplacer par : <img src="assets/img/profile.jpg" alt="Photo de Lamine"> -->
+            <div class="avatar-fallback gradient-text">L</div>
+          </div>
+        </div>
+        <div class="hero-badge">
+          <svg><use href="#icon-shield"/></svg>
+          <div>
+            <div class="b-title">Focus Développement web</div>
+            <div class="b-sub">& Systèmes d'information</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <svg><use href="#icon-chevron-down"/></svg>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       À PROPOS DE MOI
+       ============================================================ -->
+  <section class="about" id="apropos">
+    <div class="container">
+      <div class="about-photo" data-reveal="left">
+        <div class="about-photo-frame">
+          <div class="about-photo-inner">
+            <!-- Remplacer par : <img src="assets/img/profile.jpg" alt="Photo de Lamine"> -->
+            <div class="avatar-fallback gradient-text">L</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-text">
+        <span class="eyebrow" data-reveal>Profil</span>
+        <h2 class="gradient-text" data-reveal style="margin: 14px 0 26px;">À propos de moi</h2>
+
+        <p data-reveal>
+          Je m'appelle <strong>Lamine</strong>, étudiant en <strong>BTS Services Informatiques aux Organisations,
+          option SLAM</strong> (Solutions Logicielles et Applications Métiers) à My Digital School, Paris.
+          Curieux et rigoureux, j'aime comprendre les problématiques métiers pour y répondre par des solutions
+          logicielles solides, du cahier des charges jusqu'à la mise en production.
+        </p>
+        <p data-reveal>
+          Mon parcours est atypique et international : avant de me spécialiser dans le développement,
+          j'ai suivi une formation en <strong>électromécanique et systèmes automatisés</strong>, ce qui m'a
+          donné une culture technique large — de la logique matérielle à la logique logicielle. Cette double
+          compétence me permet d'aborder l'informatique avec une vision globale : réseaux, systèmes,
+          bases de données, développement et sécurité.
+        </p>
+        <p data-reveal>
+          Aujourd'hui, je me spécialise dans le <strong>développement web full-stack</strong>
+          (Next.js, React, Node.js, Python) tout en consolidant mes compétences en
+          <strong>administration système</strong>, <strong>gestion de bases de données</strong> et
+          <strong>cybersécurité</strong> — les quatre piliers du référentiel BTS SIO SLAM.
+        </p>
+
+        <div class="about-highlights">
+          <div class="highlight-card" data-reveal>
+            <svg><use href="#icon-code"/></svg>
+            <div class="h-title">Développement</div>
+            <div class="h-sub">Web & applications</div>
+          </div>
+          <div class="highlight-card" data-reveal>
+            <svg><use href="#icon-database"/></svg>
+            <div class="h-title">Données</div>
+            <div class="h-sub">Modélisation & SQL</div>
+          </div>
+          <div class="highlight-card" data-reveal>
+            <svg><use href="#icon-shield"/></svg>
+            <div class="h-title">Sécurité</div>
+            <div class="h-sub">Systèmes & réseaux</div>
+          </div>
+        </div>
+
+        <div class="about-path" data-reveal>
+          <div class="path-item"><span class="p-dot"></span> <strong>Paris, France</strong> — My Digital School, BTS SIO SLAM</div>
+          <div class="path-item"><span class="p-dot"></span> <strong>Dakar, Sénégal</strong> — ESEBAT, BTS Électromécanique</div>
+          <div class="path-item"><span class="p-dot"></span> <strong>Diourbel, Sénégal</strong> — Baccalauréat Scientifique</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FORMATIONS
+       ============================================================ -->
+  <section class="formations" id="formations">
+    <div class="container">
+      <div class="section-head" data-index="01" data-reveal>
+        <span class="eyebrow">Parcours académique</span>
+        <h2 class="gradient-text">Formations</h2>
+        <p>Un parcours progressif entre le Sénégal et la France, entre technique industrielle et informatique appliquée.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"><svg><use href="#icon-cap"/></svg></div>
+          <div class="timeline-card">
+            <span class="tl-period">En cours</span>
+            <h3 class="tl-title">BTS Services Informatiques aux Organisations — Option SLAM</h3>
+            <div class="tl-meta"><span>My Digital School</span><span>Paris, France</span></div>
+            <p class="tl-desc">Solutions Logicielles et Applications Métiers : conception et développement d'applications,
+              gestion de projets informatiques, bases de données, cybersécurité des services informatiques.</p>
+            <div class="tl-tags">
+              <span>Développement</span><span>Bases de données</span><span>Cybersécurité</span><span>Gestion de projet</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"><svg><use href="#icon-cap"/></svg></div>
+          <div class="timeline-card">
+            <span class="tl-period">Diplômé</span>
+            <h3 class="tl-title">BTS Électromécanique et Systèmes Automatisés</h3>
+            <div class="tl-meta"><span>ESEBAT</span><span>Dakar, Sénégal</span></div>
+            <p class="tl-desc">Conception, installation et maintenance de systèmes automatisés — une base technique
+              rigoureuse en électricité, mécanique et logique de commande, aujourd'hui appliquée à l'informatique.</p>
+            <div class="tl-tags">
+              <span>Automatisme</span><span>Électrotechnique</span><span>Maintenance</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"><svg><use href="#icon-award"/></svg></div>
+          <div class="timeline-card">
+            <span class="tl-period">Obtenu</span>
+            <h3 class="tl-title">Baccalauréat Scientifique</h3>
+            <div class="tl-meta"><span>Lycée d'Enseignement Général de Diourbel</span><span>Diourbel, Sénégal</span></div>
+            <p class="tl-desc">Filière scientifique : mathématiques, physique-chimie et sciences de l'ingénieur —
+              le socle logique et analytique de mon parcours technique.</p>
+            <div class="tl-tags">
+              <span>Mathématiques</span><span>Physique-Chimie</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COMPÉTENCES
+       ============================================================ -->
+  <section class="competences" id="competences">
+    <div class="container">
+      <div class="section-head" data-index="02" data-reveal>
+        <span class="eyebrow">Savoir-faire</span>
+        <h2 class="gradient-text">Compétences</h2>
+        <p>Les quatre grands pôles du référentiel BTS SIO SLAM, appliqués à des projets concrets.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-block c-blue" data-reveal>
+          <div class="skill-icon"><svg><use href="#icon-code"/></svg></div>
+          <h3>Développement Web</h3>
+          <p>Conception et développement d'applications web modernes, du prototype à la mise en production.</p>
+          <div class="skill-tags">
+            <span><svg><use href="#icon-check"/></svg>HTML5 / CSS3</span>
+            <span><svg><use href="#icon-check"/></svg>JavaScript ES6+</span>
+            <span><svg><use href="#icon-check"/></svg>React / Next.js</span>
+            <span><svg><use href="#icon-check"/></svg>Tailwind CSS</span>
+            <span><svg><use href="#icon-check"/></svg>Node.js / PHP</span>
+            <span><svg><use href="#icon-check"/></svg>Python</span>
+            <span><svg><use href="#icon-check"/></svg>Git / GitHub</span>
+            <span><svg><use href="#icon-check"/></svg>Méthodes Agile</span>
+          </div>
+        </div>
+
+        <div class="skill-block c-violet" data-reveal>
+          <div class="skill-icon"><svg><use href="#icon-database"/></svg></div>
+          <h3>Gestion de Bases de Données</h3>
+          <p>Modélisation, interrogation et administration de bases de données relationnelles et non relationnelles.</p>
+          <div class="skill-tags">
+            <span><svg><use href="#icon-check"/></svg>Merise (MCD/MLD/MPD)</span>
+            <span><svg><use href="#icon-check"/></svg>SQL avancé</span>
+            <span><svg><use href="#icon-check"/></svg>MySQL / PostgreSQL</span>
+            <span><svg><use href="#icon-check"/></svg>Prisma ORM</span>
+            <span><svg><use href="#icon-check"/></svg>SQLite</span>
+            <span><svg><use href="#icon-check"/></svg>MongoDB</span>
+            <span><svg><use href="#icon-check"/></svg>Sauvegarde / Restauration</span>
+          </div>
+        </div>
+
+        <div class="skill-block c-cyan" data-reveal>
+          <div class="skill-icon"><svg><use href="#icon-server"/></svg></div>
+          <h3>Gestion du Patrimoine Informatique</h3>
+          <p>Administration, supervision et maintenance du parc informatique et des infrastructures réseau.</p>
+          <div class="skill-tags">
+            <span><svg><use href="#icon-check"/></svg>Windows Server / Linux</span>
+            <span><svg><use href="#icon-check"/></svg>Active Directory</span>
+            <span><svg><use href="#icon-check"/></svg>DNS / DHCP</span>
+            <span><svg><use href="#icon-check"/></svg>Virtualisation</span>
+            <span><svg><use href="#icon-check"/></svg>Gestion de parc</span>
+            <span><svg><use href="#icon-check"/></svg>Support utilisateurs</span>
+            <span><svg><use href="#icon-check"/></svg>Documentation technique</span>
+          </div>
+        </div>
+
+        <div class="skill-block c-magenta" data-reveal>
+          <div class="skill-icon"><svg><use href="#icon-shield"/></svg></div>
+          <h3>Cybersécurité</h3>
+          <p>Protection des systèmes, des données et des utilisateurs face aux risques numériques.</p>
+          <div class="skill-tags">
+            <span><svg><use href="#icon-check"/></svg>Sécurisation réseau</span>
+            <span><svg><use href="#icon-check"/></svg>Pare-feu / VPN</span>
+            <span><svg><use href="#icon-check"/></svg>Gestion des accès</span>
+            <span><svg><use href="#icon-check"/></svg>Veille CVE</span>
+            <span><svg><use href="#icon-check"/></svg>RGPD</span>
+            <span><svg><use href="#icon-check"/></svg>PRA / PCA</span>
+            <span><svg><use href="#icon-check"/></svg>Sensibilisation phishing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       VEILLE INFORMATIQUE
+       ============================================================ -->
+  <section class="veille" id="veille">
+    <div class="container">
+      <div class="section-head" data-index="03" data-reveal>
+        <span class="eyebrow">Amélioration continue</span>
+        <h2 class="gradient-text">Veille Informatique</h2>
+        <p>Le secteur informatique évolue vite : je consacre du temps chaque semaine à une veille
+          structurée pour rester à jour sur le développement, la sécurité et les infrastructures —
+          une compétence à part entière du référentiel BTS SIO SLAM.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-block c-blue" data-reveal>
+          <div class="skill-icon"><svg><use href="#icon-code"/></svg></div>
+          <h3>Développement & Frameworks</h3>
+          <p>Suivi de l'écosystème JavaScript/TypeScript et des évolutions des frameworks front-end
+            et back-end modernes.</p>
+          <div class="skill-tags">
+            <span><svg><use href="#icon-check"/></svg>Next.js</span>
+            <span><svg><use href="#icon-check"/></svg>React</span>
+            <span><svg><use href="#icon-check"/></svg>TypeScript</span>
+            <span><svg><use href="#icon-check"/></svg>Web Performance</span>
+          </div>
+        </div>
+
+        <div class="skill-block c-magenta" data-reveal>
+          <div class="skill-icon"><svg><use href="#icon-shield"/></svg></div>
+          <h3>Cybersécurité</h3>
+          <p>Veille active sur les vulnérabilités, les nouvelles menaces et les bonnes pratiques
+            de sécurisation des systèmes et des données.</p>
+          <div class="skill-tags">
+            <span><svg><use href="#icon-check"/></svg>CVE / OWASP</span>
+            <span><svg><use href="#icon-check"/></svg>RGPD</span>
+            <span><svg><use href="#icon-check"/></svg>Pentesting</span>
+          </div>
+        </div>
+
+        <div class="skill-block c-cyan" data-reveal>
+          <div class="skill-icon"><svg><use href="#icon-server"/></svg></div>
+          <h3>Cloud & Infrastructures</h3>
+          <p>Observation des tendances en virtualisation, conteneurisation et automatisation
+            de l'administration système.</p>
+          <div class="skill-tags">
+            <span><svg><use href="#icon-check"/></svg>Docker</span>
+            <span><svg><use href="#icon-check"/></svg>Cloud</span>
+            <span><svg><use href="#icon-check"/></svg>DevOps</span>
+          </div>
+        </div>
+
+        <div class="skill-block c-violet" data-reveal>
+          <div class="skill-icon"><svg><use href="#icon-zap"/></svg></div>
+          <h3>Intelligence Artificielle</h3>
+          <p>Observation de l'impact de l'IA générative sur le développement logiciel et les
+            nouveaux outils d'assistance au code.</p>
+          <div class="skill-tags">
+            <span><svg><use href="#icon-check"/></svg>IA générative</span>
+            <span><svg><use href="#icon-check"/></svg>Outils IA</span>
+            <span><svg><use href="#icon-check"/></svg>Automatisation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="veille-tools" data-reveal>
+        <h4>Mes outils & sources de veille</h4>
+        <div class="skill-tags">
+          <span><svg><use href="#icon-rss"/></svg>Flux RSS (Feedly)</span>
+          <span><svg><use href="#icon-check"/></svg>Newsletters tech</span>
+          <span><svg><use href="#icon-check"/></svg>GitHub Trending</span>
+          <span><svg><use href="#icon-check"/></svg>Hacker News</span>
+          <span><svg><use href="#icon-linkedin"/></svg>LinkedIn</span>
+          <span><svg><use href="#icon-check"/></svg>Communautés Discord</span>
+          <span><svg><use href="#icon-check"/></svg>Chaînes YouTube tech</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPÉRIENCES PROFESSIONNELLES
+       ============================================================ -->
+  <section class="experiences" id="experiences">
+    <div class="container">
+      <div class="section-head" data-index="04" data-reveal>
+        <span class="eyebrow">Terrain</span>
+        <h2 class="gradient-text">Expériences Professionnelles</h2>
+        <p>Stages, ateliers de professionnalisation et activités freelance qui complètent ma formation académique.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"><svg><use href="#icon-briefcase"/></svg></div>
+          <div class="timeline-card">
+            <span class="tl-period">Stage</span>
+            <h3 class="tl-title">Stage technique — Développement & support informatique</h3>
+            <div class="tl-meta"><span>Entreprise d'accueil</span><span>Paris, France</span></div>
+            <p class="tl-desc">Mise en pratique des compétences BTS SIO SLAM en environnement professionnel :
+              participation au développement d'outils internes, maintenance du parc informatique et support
+              aux utilisateurs.</p>
+            <div class="tl-tags"><span>Développement</span><span>Support</span><span>Travail en équipe</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"><svg><use href="#icon-award"/></svg></div>
+          <div class="timeline-card">
+            <span class="tl-period">Ateliers de professionnalisation</span>
+            <h3 class="tl-title">My Digital School — Développement des compétences transversales</h3>
+            <div class="tl-meta"><span>My Digital School</span><span>Paris, France</span></div>
+            <p class="tl-desc">Ateliers pratiques en gestion de projet, méthodologie Agile, communication
+              professionnelle et conduite de projets informatiques en équipe, en conditions proches du réel.</p>
+            <div class="tl-tags"><span>Gestion de projet</span><span>Agile / Scrum</span><span>Soft skills</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"><svg><use href="#icon-terminal"/></svg></div>
+          <div class="timeline-card">
+            <span class="tl-period">Freelance</span>
+            <h3 class="tl-title">Développeur Web Indépendant</h3>
+            <div class="tl-meta"><span>Missions personnelles</span><span>À distance</span></div>
+            <p class="tl-desc">Conception de sites web et d'applications sur mesure pour des particuliers et
+              petites structures : de l'analyse du besoin à la mise en ligne, en autonomie complète.</p>
+            <div class="tl-tags"><span>Next.js</span><span>Python</span><span>Relation client</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJETS
+       ============================================================ -->
+  <section class="projets" id="projets">
+    <div class="container">
+      <div class="section-head" data-index="05" data-reveal>
+        <span class="eyebrow">Réalisations</span>
+        <h2 class="gradient-text">Projets</h2>
+        <p>Une sélection de projets académiques et personnels illustrant mes compétences en développement.</p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card" data-reveal>
+          <div class="project-media">
+            <span class="p-status"><span class="dot"></span>Déployé</span>
+            <span class="p-mark gradient-text-accent">MDS Avis</span>
+          </div>
+          <div class="project-body">
+            <h3>MDS Avis</h3>
+            <p>Application web permettant aux étudiants de My Digital School de consulter et déposer des avis
+              sur les formations, modules et intervenants. Authentification, tableau de bord et persistance
+              des données via une base relationnelle gérée avec Prisma ORM.</p>
+            <div class="project-tags">
+              <span>Next.js</span><span>Prisma</span><span>Tailwind CSS</span><span>Full-Stack</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://mds-avis.example.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" data-config-href="mdsAvisUrl">
+                Voir le site <svg><use href="#icon-external"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" data-reveal>
+          <div class="project-media">
+            <span class="p-status"><span class="dot"></span>Projet académique</span>
+            <span class="p-mark gradient-text-accent">Python</span>
+          </div>
+          <div class="project-body">
+            <h3>Application de Gestion en Python</h3>
+            <p>Conception et développement d'une application Python orientée objet, avec interface utilisateur,
+              manipulation de données et logique métier structurée — projet réalisé dans le cadre de ma formation
+              BTS SIO SLAM.</p>
+            <div class="project-tags">
+              <span>Python</span><span>POO</span><span>Algorithmique</span>
+            </div>
+            <div class="project-actions">
+              <a href="#" class="btn btn-ghost btn-sm" data-config-href="pythonProjectUrl">
+                Voir le code <svg><use href="#icon-external"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RÉSEAUX SOCIAUX
+       ============================================================ -->
+  <section class="reseaux" id="reseaux">
+    <div class="container">
+      <div class="section-head" data-index="06" data-reveal>
+        <span class="eyebrow">Restons connectés</span>
+        <h2 class="gradient-text">Réseaux Sociaux</h2>
+        <p>Retrouvez-moi et suivez mon travail sur ces différentes plateformes.</p>
+      </div>
+
+      <div class="socials-grid">
+        <a href="#" class="social-card" data-reveal data-config-href="linkedin" target="_blank" rel="noopener noreferrer">
+          <div class="social-icon"><svg><use href="#icon-linkedin"/></svg></div>
+          <h4>LinkedIn</h4>
+          <p>Parcours, expériences & réseau professionnel</p>
+          <span class="s-arrow">Voir le profil <svg><use href="#icon-arrow-right"/></svg></span>
+        </a>
+
+        <a href="#" class="social-card" data-reveal data-config-href="instagram" target="_blank" rel="noopener noreferrer">
+          <div class="social-icon"><svg><use href="#icon-instagram"/></svg></div>
+          <h4>Instagram</h4>
+          <p>Aperçus de mon quotidien & de mes projets</p>
+          <span class="s-arrow">Voir le profil <svg><use href="#icon-arrow-right"/></svg></span>
+        </a>
+
+        <a href="#" class="social-card" data-reveal data-config-href="github" target="_blank" rel="noopener noreferrer">
+          <div class="social-icon"><svg><use href="#icon-github"/></svg></div>
+          <h4>GitHub</h4>
+          <p>Mes projets de développement en code source</p>
+          <span class="s-arrow">Voir le profil <svg><use href="#icon-arrow-right"/></svg></span>
+        </a>
+
+        <a href="#" class="social-card" data-reveal data-config-href="website" target="_blank" rel="noopener noreferrer">
+          <div class="social-icon"><svg><use href="#icon-globe"/></svg></div>
+          <h4>Site Vitrine</h4>
+          <p>Mon site personnel — portfolio & actualités</p>
+          <span class="s-arrow">Visiter le site <svg><use href="#icon-arrow-right"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+       ============================================================ -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-wrap" data-reveal>
+        <div class="contact-intro">
+          <span class="status-pill"><span class="pulse-dot"></span>Disponible pour stage & alternance</span>
+          <span class="eyebrow" style="margin-top:18px;">Contact</span>
+          <h2 class="gradient-text" style="margin-top:14px;">Me Contacter</h2>
+          <p>
+            Une question, une opportunité de stage ou un projet à me proposer ? N'hésitez pas à me
+            contacter directement par mail, téléphone ou WhatsApp — je réponds rapidement.
+          </p>
+          <a href="#" class="btn btn-primary" data-config-href="whatsappLink" target="_blank" rel="noopener noreferrer">
+            Discuter sur WhatsApp <svg><use href="#icon-whatsapp"/></svg>
+          </a>
+        </div>
+
+        <div class="contact-cards">
+          <div class="contact-card">
+            <div class="c-icon"><svg><use href="#icon-award"/></svg></div>
+            <div>
+              <div class="c-label">Nom complet</div>
+              <div class="c-value" data-config="fullName">Lamine</div>
+            </div>
+          </div>
+
+          <a class="contact-card" href="#" data-config-href="emailHref">
+            <div class="c-icon"><svg><use href="#icon-mail"/></svg></div>
+            <div>
+              <div class="c-label">Adresse e-mail</div>
+              <div class="c-value" data-config="email">contact@example.com</div>
+            </div>
+          </a>
+
+          <a class="contact-card" href="#" data-config-href="phoneHref">
+            <div class="c-icon"><svg><use href="#icon-phone"/></svg></div>
+            <div>
+              <div class="c-label">Téléphone</div>
+              <div class="c-value" data-config="phone">+33 6 00 00 00 00</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer-note">© <span id="year"></span> Lamine — BTS SIO SLAM. Conçu & développé avec passion.</p>
+    <div class="footer-links">
+      <a href="#" data-config-href="linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg><use href="#icon-linkedin"/></svg></a>
+      <a href="#" data-config-href="github" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg><use href="#icon-github"/></svg></a>
+      <a href="#" data-config-href="instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg><use href="#icon-instagram"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     FLOATING ACTIONS
+     ============================================================ -->
+<div class="floating-actions">
+  <button class="fab fab-top" id="backToTop" aria-label="Retour en haut">
+    <svg><use href="#icon-arrow-up"/></svg>
+  </button>
+  <a href="#" class="fab fab-whatsapp" id="whatsappFab" data-config-href="whatsappLink" target="_blank" rel="noopener noreferrer" aria-label="Me contacter sur WhatsApp">
+    <span class="fab-tooltip">WhatsApp</span>
+    <svg><use href="#icon-whatsapp"/></svg>
+  </a>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
