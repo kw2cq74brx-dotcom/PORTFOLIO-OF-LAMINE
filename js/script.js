@@ -10,7 +10,7 @@
 const CONFIG = {
   fullName: "Baye Lamine Gueye",
   role: "Développeur Web Full-Stack",
-  email: "contact@example.com",
+  email: "bayelamine.gueye19@gmail.com",
   phone: "+33 7 59 06 20 43",
 
   // Numéro WhatsApp au format international, SANS "+", espaces ni tirets
