@@ -8,7 +8,7 @@
       automatiquement injectées dans toute la page.
    -------------------------------------------------------------------------- */
 const CONFIG = {
-  fullName: "Lamine",
+  fullName: "Baye Lamine Gueye",
   role: "Développeur Web Full-Stack",
   email: "contact@example.com",
   phone: "+33 7 59 06 20 43",
@@ -17,12 +17,12 @@ const CONFIG = {
   whatsappNumber: "33759062043",
   whatsappMessage: "Bonjour Lamine, je vous contacte suite à la consultation de votre portfolio.",
 
-  linkedin: "https://www.linkedin.com/in/votre-profil",
+  linkedin: "https://www.linkedin.com/in/baye-lamine-gueye-b760a8341",
   instagram: "https://www.instagram.com/votre_compte",
   github: "https://github.com/votre-compte",
   website: "https://votre-site-vitrine.com",
 
-  mdsAvisUrl: "https://mds-avis.example.com",
+  mdsAvisUrl: "https://mds-avis-frontend.vercel.app",
   pythonProjectUrl: "https://github.com/votre-compte/projet-python"
 };
 
