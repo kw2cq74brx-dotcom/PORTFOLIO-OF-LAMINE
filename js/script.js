@@ -19,7 +19,7 @@ const CONFIG = {
 
   linkedin: "https://www.linkedin.com/in/baye-lamine-gueye-b760a8341",
   instagram: "https://www.instagram.com/votre_compte",
-  github: "https://github.com/votre-compte",
+  github: "https://github.com/kw2cq74brx-dotcom/PORTFOLIO-OF-LAMINE",
   website: "https://votre-site-vitrine.com",
 
   mdsAvisUrl: "https://mds-avis-frontend.vercel.app",
