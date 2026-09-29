@@ -307,12 +307,14 @@ function initMagneticButtons() {
 }
 
 /* --------------------------------------------------------------------------
-   14. 3D TILT (project cards + photo frames)
+   14. 3D TILT (photo frames)
    -------------------------------------------------------------------------- */
 function initTilt() {
   if (window.matchMedia("(hover: none)").matches) return;
 
-  const strongTilt = document.querySelectorAll(".project-card");
+  // .project-card is excluded here: its transform is fully owned by the
+  // projects carousel (initProjectsCarousel), which would otherwise fight
+  // this mousemove-driven inline transform for the same CSS property.
   const softTilt = document.querySelectorAll(".hero-photo-frame, .about-photo-frame");
 
   function bindTilt(el, maxDeg, lift) {
@@ -334,7 +336,6 @@ function initTilt() {
     });
   }
 
-  strongTilt.forEach((el) => bindTilt(el, 6, -8));
   softTilt.forEach((el) => bindTilt(el, 8, 0));
 }
 
@@ -549,6 +550,122 @@ function initProximityGrids() {
 }
 
 /* --------------------------------------------------------------------------
+   14.6 PROJECTS 3D DRAG CAROUSEL
+   -------------------------------------------------------------------------- */
+function initProjectsCarousel() {
+  const stage = document.getElementById("carouselStage");
+  const track = document.getElementById("carouselTrack");
+  const dotsWrap = document.getElementById("carouselDots");
+  const prevBtn = document.getElementById("carouselPrev");
+  const nextBtn = document.getElementById("carouselNext");
+  if (!stage || !track || !dotsWrap || typeof gsap === "undefined") return;
+
+  const cards = Array.from(track.querySelectorAll(".project-card"));
+  if (!cards.length) return;
+
+  let activeIndex = 0;
+
+  cards.forEach((_, i) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "carousel-dot";
+    dot.setAttribute("aria-label", `Aller au projet ${i + 1}`);
+    dot.addEventListener("click", () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function transformFor(offset) {
+    const abs = Math.abs(offset);
+    if (abs === 0) {
+      return { xPercent: -50, z: 0, rotationY: 0, scale: 1, opacity: 1, zIndex: 30, pointerEvents: "auto" };
+    }
+    if (abs === 1) {
+      return {
+        xPercent: -50 + offset * 62,
+        z: -240,
+        rotationY: offset * -34,
+        scale: 0.82,
+        opacity: 0.5,
+        zIndex: 20,
+        pointerEvents: "none"
+      };
+    }
+    return {
+      xPercent: -50 + offset * 95,
+      z: -440,
+      rotationY: offset * -42,
+      scale: 0.6,
+      opacity: 0,
+      zIndex: 10,
+      pointerEvents: "none"
+    };
+  }
+
+  function syncHeight() {
+    stage.style.height = `${cards[activeIndex].offsetHeight}px`;
+  }
+
+  function render(animate) {
+    cards.forEach((card, i) => {
+      const t = transformFor(i - activeIndex);
+      gsap[animate ? "to" : "set"](card, { ...t, duration: 0.7, ease: "power3.out", overwrite: true });
+    });
+    dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
+    syncHeight();
+  }
+
+  function goTo(index) {
+    activeIndex = (index + cards.length) % cards.length;
+    render(true);
+  }
+
+  prevBtn.addEventListener("click", () => goTo(activeIndex - 1));
+  nextBtn.addEventListener("click", () => goTo(activeIndex + 1));
+
+  let startX = 0;
+  let dragX = 0;
+  let dragging = false;
+
+  stage.addEventListener("pointerdown", (e) => {
+    dragging = true;
+    startX = e.clientX;
+    stage.setPointerCapture(e.pointerId);
+  });
+
+  stage.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    dragX = e.clientX - startX;
+    const nudge = gsap.utils.clamp(-18, 18, dragX / 8);
+    gsap.set(cards[activeIndex], { xPercent: -50 + nudge });
+  });
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    if (dragX < -60) goTo(activeIndex + 1);
+    else if (dragX > 60) goTo(activeIndex - 1);
+    else render(true);
+    dragX = 0;
+  }
+
+  stage.addEventListener("pointerup", endDrag);
+  stage.addEventListener("pointercancel", endDrag);
+
+  document.addEventListener("keydown", (e) => {
+    const r = stage.getBoundingClientRect();
+    const inView = r.top < window.innerHeight && r.bottom > 0;
+    if (!inView) return;
+    if (e.key === "ArrowLeft") goTo(activeIndex - 1);
+    if (e.key === "ArrowRight") goTo(activeIndex + 1);
+  });
+
+  window.addEventListener("resize", syncHeight);
+
+  render(false);
+}
+
+/* --------------------------------------------------------------------------
    15. CURSOR HOVER STATE
    -------------------------------------------------------------------------- */
 function initCursorHoverState() {
@@ -585,4 +702,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initCursorHoverState();
   initCvDownload();
   initProximityGrids();
+  initProjectsCarousel();
 });

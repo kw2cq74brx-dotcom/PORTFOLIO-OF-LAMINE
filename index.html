@@ -527,48 +527,67 @@
         <p>Une sélection de projets académiques et personnels illustrant mes compétences en développement.</p>
       </div>
 
-      <div class="projects-grid">
-        <article class="project-card" data-reveal>
-          <div class="project-media">
-            <span class="p-status"><span class="dot"></span>Déployé</span>
-            <span class="p-mark gradient-text-accent">MDS Avis</span>
-          </div>
-          <div class="project-body">
-            <h3>MDS Avis</h3>
-            <p>Application web permettant aux étudiants de My Digital School de consulter et déposer des avis
-              sur les formations, modules et intervenants. Authentification, tableau de bord et persistance
-              des données via une base relationnelle gérée avec Prisma ORM.</p>
-            <div class="project-tags">
-              <span>Next.js</span><span>Prisma</span><span>Tailwind CSS</span><span>Full-Stack</span>
-            </div>
-            <div class="project-actions">
-              <a href="https://mds-avis-frontend.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" data-config-href="mdsAvisUrl">
-                Voir le site <svg><use href="#icon-external"/></svg>
-              </a>
-            </div>
-          </div>
-        </article>
+      <div class="projects-carousel" data-reveal>
+        <div class="carousel-stage" id="carouselStage">
+          <div class="carousel-track" id="carouselTrack">
+            <article class="project-card">
+              <div class="project-media">
+                <span class="p-status"><span class="dot"></span>Déployé</span>
+                <!-- Déposez votre capture d'écran ici : assets/img/projects/mds-avis.jpg -->
+                <img class="project-thumb" src="assets/img/projects/mds-avis.jpg" alt="Aperçu du projet MDS Avis" loading="lazy" onerror="this.style.display='none'">
+                <span class="p-mark gradient-text-accent">MDS Avis</span>
+              </div>
+              <div class="project-body">
+                <h3>MDS Avis</h3>
+                <p>Application web permettant aux étudiants de My Digital School de consulter et déposer des avis
+                  sur les formations, modules et intervenants. Authentification, tableau de bord et persistance
+                  des données via une base relationnelle gérée avec Prisma ORM.</p>
+                <div class="project-tags">
+                  <span>Next.js</span><span>Prisma</span><span>Tailwind CSS</span><span>Full-Stack</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://mds-avis-frontend.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" data-config-href="mdsAvisUrl">
+                    Voir le site <svg><use href="#icon-external"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
 
-        <article class="project-card" data-reveal>
-          <div class="project-media">
-            <span class="p-status"><span class="dot"></span>Projet académique</span>
-            <span class="p-mark gradient-text-accent">Python</span>
+            <article class="project-card">
+              <div class="project-media">
+                <span class="p-status"><span class="dot"></span>Projet académique</span>
+                <!-- Déposez votre capture d'écran ici : assets/img/projects/python-app.jpg -->
+                <img class="project-thumb" src="assets/img/projects/python-app.jpg" alt="Aperçu de l'application Python" loading="lazy" onerror="this.style.display='none'">
+                <span class="p-mark gradient-text-accent">Python</span>
+              </div>
+              <div class="project-body">
+                <h3>Application de Gestion en Python</h3>
+                <p>Conception et développement d'une application Python orientée objet, avec interface utilisateur,
+                  manipulation de données et logique métier structurée — projet réalisé dans le cadre de ma formation
+                  BTS SIO SLAM.</p>
+                <div class="project-tags">
+                  <span>Python</span><span>POO</span><span>Algorithmique</span>
+                </div>
+                <div class="project-actions">
+                  <a href="#" class="btn btn-ghost btn-sm" data-config-href="pythonProjectUrl">
+                    Voir le code <svg><use href="#icon-external"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
           </div>
-          <div class="project-body">
-            <h3>Application de Gestion en Python</h3>
-            <p>Conception et développement d'une application Python orientée objet, avec interface utilisateur,
-              manipulation de données et logique métier structurée — projet réalisé dans le cadre de ma formation
-              BTS SIO SLAM.</p>
-            <div class="project-tags">
-              <span>Python</span><span>POO</span><span>Algorithmique</span>
-            </div>
-            <div class="project-actions">
-              <a href="#" class="btn btn-ghost btn-sm" data-config-href="pythonProjectUrl">
-                Voir le code <svg><use href="#icon-external"/></svg>
-              </a>
-            </div>
-          </div>
-        </article>
+        </div>
+
+        <div class="carousel-controls">
+          <button type="button" class="carousel-arrow prev" id="carouselPrev" aria-label="Projet précédent">
+            <svg><use href="#icon-arrow-right"/></svg>
+          </button>
+          <div class="carousel-dots" id="carouselDots"></div>
+          <button type="button" class="carousel-arrow next" id="carouselNext" aria-label="Projet suivant">
+            <svg><use href="#icon-arrow-right"/></svg>
+          </button>
+        </div>
+        <span class="carousel-hint">Glissez ou utilisez les flèches pour naviguer</span>
       </div>
     </div>
   </section>
