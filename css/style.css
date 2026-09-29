@@ -1241,6 +1241,75 @@ main > section:not(.hero) {
 
 .skill-tags span svg { width: 12px; height: 12px; color: var(--accent-blue-2); flex-shrink: 0; }
 
+/* ---- Proximity Scale Grid (Compétences) ---- */
+.skill-stage {
+  position: relative;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.skill-card {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  rotate: var(--r, 0deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 72px;
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+.skill-card .sc-icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.skill-card .sc-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.skill-card .sc-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--text-lavender);
+}
+
+.skill-card .sc-label {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  letter-spacing: .01em;
+  text-align: center;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+@media (hover: none), (max-width: 640px) {
+  .skill-stage {
+    height: auto !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px 20px;
+    padding: 6px 0 2px;
+  }
+  .skill-card {
+    position: static;
+    rotate: 0deg;
+    width: 64px;
+  }
+}
+
 /* --------------------------------------------------------------------------
    12. PROJETS
    -------------------------------------------------------------------------- */

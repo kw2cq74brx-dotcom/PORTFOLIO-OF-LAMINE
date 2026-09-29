@@ -471,7 +471,7 @@ function generateCvPdf() {
     sectionTitle("Compétences");
     competencesEl.querySelectorAll(".skill-block").forEach((block) => {
       entryHeader(textFrom(block, "h3"), "");
-      paragraph(listFrom(block, ".skill-tags span"), { size: 9, gap: 12 });
+      paragraph(listFrom(block, ".skill-tags span, .sc-label"), { size: 9, gap: 12 });
       y += 6;
     });
   }
@@ -510,6 +510,45 @@ function initCvDownload() {
 }
 
 /* --------------------------------------------------------------------------
+   14.5 PROXIMITY SCALE GRID (Compétences skill icons)
+   -------------------------------------------------------------------------- */
+function initProximityGrids() {
+  if (typeof gsap === "undefined") return;
+  if (window.matchMedia("(hover: none)").matches) return;
+
+  const radius = 120;
+  const maxScale = 1.8;
+  const dur = 0.35;
+
+  document.querySelectorAll(".skill-stage").forEach((stage) => {
+    const cards = gsap.utils.toArray(stage.querySelectorAll(".skill-card"));
+
+    stage.addEventListener("mousemove", (e) => {
+      cards.forEach((card) => {
+        const r = card.getBoundingClientRect();
+        const d = Math.hypot(
+          e.clientX - (r.left + r.width / 2),
+          e.clientY - (r.top + r.height / 2)
+        );
+        const p = gsap.utils.clamp(0, 1, gsap.utils.mapRange(0, radius, 1, 0, d));
+        gsap.to(card, {
+          scale: 1 + (maxScale - 1) * p,
+          duration: dur,
+          overwrite: true,
+          ease: "power2.out"
+        });
+      });
+    });
+
+    stage.addEventListener("mouseleave", () => {
+      cards.forEach((card) => {
+        gsap.to(card, { scale: 1, duration: dur * 2, overwrite: true, ease: "power2.out" });
+      });
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
    15. CURSOR HOVER STATE
    -------------------------------------------------------------------------- */
 function initCursorHoverState() {
@@ -545,4 +584,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initTilt();
   initCursorHoverState();
   initCvDownload();
+  initProximityGrids();
 });
