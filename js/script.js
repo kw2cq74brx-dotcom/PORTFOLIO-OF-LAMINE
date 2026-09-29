@@ -628,6 +628,7 @@ function initProjectsCarousel() {
   let dragging = false;
 
   stage.addEventListener("pointerdown", (e) => {
+    if (e.target.closest("a, button")) return;
     dragging = true;
     startX = e.clientX;
     stage.setPointerCapture(e.pointerId);
