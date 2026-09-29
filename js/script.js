@@ -667,6 +667,57 @@ function initProjectsCarousel() {
 }
 
 /* --------------------------------------------------------------------------
+   14.7 FORMATIONS — REFLECTION SCROLL EFFECT
+   Adapted from codrops/ReflectionScroll (tympanus.net), scaled down from a
+   full-page mirrored scroll strip (which relies on Lenis + a fixed,
+   viewport-height flipped wrapper) to a self-contained per-card reflection,
+   so it doesn't take over scrolling for the rest of the site.
+   -------------------------------------------------------------------------- */
+function initFormationsReflection() {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  if (window.matchMedia("(hover: none)").matches) return;
+  if (window.matchMedia("(max-width: 900px)").matches) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.querySelectorAll("#formations .timeline-item").forEach((item) => {
+    const card = item.querySelector(".timeline-card");
+    if (!card) return;
+
+    const clone = card.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    clone.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
+
+    const flip = document.createElement("div");
+    flip.className = "tl-reflection-flip";
+    flip.appendChild(clone);
+
+    const wrap = document.createElement("div");
+    wrap.className = "tl-reflection-wrap";
+    wrap.appendChild(flip);
+
+    item.appendChild(wrap);
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: item,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    }).fromTo([card, clone], {
+      transformOrigin: "50% 0%",
+      filter: "contrast(105%) brightness(100%)"
+    }, {
+      ease: "power1.in",
+      rotationX: 8,
+      scaleY: 0.96,
+      filter: "contrast(90%) brightness(60%)"
+    }, 0);
+  });
+}
+
+/* --------------------------------------------------------------------------
    15. CURSOR HOVER STATE
    -------------------------------------------------------------------------- */
 function initCursorHoverState() {
@@ -704,4 +755,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initCvDownload();
   initProximityGrids();
   initProjectsCarousel();
+  initFormationsReflection();
 });

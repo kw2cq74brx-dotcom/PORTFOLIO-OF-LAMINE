@@ -833,10 +833,21 @@ main > section:not(.hero) {
    9. ABOUT
    -------------------------------------------------------------------------- */
 .about .container {
-  display: grid;
-  grid-template-columns: .8fr 1.2fr;
-  gap: 70px;
-  align-items: start;
+  display: block;
+}
+
+.about-text {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-text .eyebrow {
+  justify-content: center;
+}
+
+.about-path .path-item {
+  justify-content: center;
 }
 
 .about-photo {
@@ -1015,6 +1026,40 @@ main > section:not(.hero) {
   background: var(--bg-card);
   backdrop-filter: blur(8px);
   transition: border-color .35s ease, transform .35s ease, box-shadow .35s ease;
+}
+
+/* ---- Formations : reflet miroir animé au scroll ---- */
+#formations .timeline-item {
+  perspective: 800px;
+}
+
+.tl-reflection-wrap {
+  position: relative;
+  height: 90px;
+  margin-top: -4px;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 800px;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.45), transparent 78%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.45), transparent 78%);
+}
+
+.tl-reflection-flip {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  transform: scaleY(-1);
+  transform-origin: top;
+  transform-style: preserve-3d;
+}
+
+.tl-reflection-flip .timeline-card {
+  opacity: .38;
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+@media (hover: none), (max-width: 900px) {
+  .tl-reflection-wrap { display: none; }
 }
 
 .timeline-item:hover .timeline-dot {
@@ -2045,8 +2090,6 @@ main > section:not(.hero) {
    19. RESPONSIVE
    -------------------------------------------------------------------------- */
 @media (max-width: 1080px) {
-  .about .container { grid-template-columns: 1fr; }
-  .about-photo { position: static; max-width: 320px; margin: 0 auto 20px; }
   .socials-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
