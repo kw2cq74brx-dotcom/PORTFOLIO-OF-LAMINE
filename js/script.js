@@ -718,6 +718,143 @@ function initFormationsReflection() {
 }
 
 /* --------------------------------------------------------------------------
+   14.8 GSAP INFINITE HORIZONTAL LOOP (helper)
+   Canonical seamless-loop helper published by GSAP (Jack Doyle) — wraps a
+   row of items into a perfectly looping timeline with no visible seam.
+   -------------------------------------------------------------------------- */
+function horizontalLoop(items, config) {
+  items = gsap.utils.toArray(items);
+  config = config || {};
+
+  const tl = gsap.timeline({
+    repeat: config.repeat,
+    paused: config.paused,
+    defaults: { ease: "none" },
+    onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
+  });
+
+  const length = items.length;
+  const startX = items[0].offsetLeft;
+  const times = [];
+  const widths = [];
+  const xPercents = [];
+  const pixelsPerSecond = (config.speed || 1) * 100;
+  const snap = config.snap === false ? (v) => v : gsap.utils.snap(config.snap || 1);
+  let curIndex = 0;
+  let totalWidth, curX, distanceToStart, distanceToLoop, item, i;
+
+  gsap.set(items, {
+    xPercent: (i, el) => {
+      const w = (widths[i] = parseFloat(gsap.getProperty(el, "width", "px")));
+      xPercents[i] = snap(
+        (parseFloat(gsap.getProperty(el, "x", "px")) / w) * 100 + gsap.getProperty(el, "xPercent")
+      );
+      return xPercents[i];
+    }
+  });
+  gsap.set(items, { x: 0 });
+
+  totalWidth =
+    items[length - 1].offsetLeft +
+    (xPercents[length - 1] / 100) * widths[length - 1] -
+    startX +
+    items[length - 1].offsetWidth * gsap.getProperty(items[length - 1], "scaleX") +
+    (parseFloat(config.paddingRight) || 0);
+
+  for (i = 0; i < length; i++) {
+    item = items[i];
+    curX = (xPercents[i] / 100) * widths[i];
+    distanceToStart = item.offsetLeft + curX - startX;
+    distanceToLoop = distanceToStart + widths[i] * gsap.getProperty(item, "scaleX");
+
+    tl.to(item, {
+      xPercent: snap(((curX - distanceToLoop) / widths[i]) * 100),
+      duration: distanceToLoop / pixelsPerSecond
+    }, 0)
+      .fromTo(item, {
+        xPercent: snap(((curX - distanceToLoop + totalWidth) / widths[i]) * 100)
+      }, {
+        xPercent: xPercents[i],
+        duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
+        immediateRender: false
+      }, distanceToLoop / pixelsPerSecond)
+      .add("label" + i, distanceToStart / pixelsPerSecond);
+
+    times[i] = distanceToStart / pixelsPerSecond;
+  }
+
+  tl.times = times;
+  tl.progress(1, true).progress(0, true);
+
+  if (config.reversed) {
+    tl.vars.onReverseComplete();
+    tl.reverse();
+  }
+
+  return tl;
+}
+
+/* --------------------------------------------------------------------------
+   14.9 VEILLE — CARROUSEL HORIZONTAL INFINI DES OUTILS/SOURCES
+   -------------------------------------------------------------------------- */
+function initVeilleMarquee() {
+  if (typeof gsap === "undefined") return;
+
+  const track = document.getElementById("veilleMarqueeTrack");
+  if (!track) return;
+
+  const wrap = track.closest(".veille-marquee");
+  const originalTags = Array.from(track.children);
+  if (!originalTags.length) return;
+
+  // Duplicate the tags so the strip is comfortably wider than any viewport,
+  // guaranteeing a seamless conveyor-belt look at all screen sizes.
+  for (let copy = 0; copy < 2; copy++) {
+    originalTags.forEach((tag) => track.appendChild(tag.cloneNode(true)));
+  }
+
+  const loop = horizontalLoop(track.children, { repeat: -1, speed: 0.5 });
+
+  wrap.addEventListener("mouseenter", () => loop.pause());
+  wrap.addEventListener("mouseleave", () => loop.play());
+}
+
+/* --------------------------------------------------------------------------
+   14.10 DOWNLOAD CV — ICON MORPH ON CLICK
+   Adapted from codepen.io/osmosupply/pen/yyyzMee ("Morphing Play/Pause"):
+   a single SVG path smoothly morphs into another shape via MorphSVGPlugin
+   as a click-feedback confirmation, then reverts after a short delay.
+   -------------------------------------------------------------------------- */
+function initCvIconMorph() {
+  if (typeof gsap === "undefined" || typeof MorphSVGPlugin === "undefined") return;
+
+  const btn = document.getElementById("downloadCvBtn");
+  const icon = document.getElementById("cvIcon");
+  const path = document.getElementById("cvIconPath");
+  if (!btn || !icon || !path) return;
+
+  gsap.registerPlugin(MorphSVGPlugin);
+
+  const downloadShape = "M12 3 L12 15 M7 10 L12 15 L17 10 M5 19 L19 19";
+  const checkShape = "M5 13 L9 17 L19 6";
+  let revertTimer;
+
+  btn.addEventListener("click", () => {
+    clearTimeout(revertTimer);
+
+    gsap.to(path, { morphSVG: checkShape, duration: 0.45, ease: "back.out(2)", overwrite: true });
+    gsap.fromTo(icon,
+      { scale: 1, transformOrigin: "50% 50%" },
+      { scale: 1.3, duration: 0.25, yoyo: true, repeat: 1, ease: "power2.out", overwrite: true }
+    );
+
+    revertTimer = setTimeout(() => {
+      gsap.to(path, { morphSVG: downloadShape, duration: 0.4, ease: "power2.inOut", overwrite: true });
+    }, 1800);
+  });
+}
+
+/* --------------------------------------------------------------------------
    15. CURSOR HOVER STATE
    -------------------------------------------------------------------------- */
 function initCursorHoverState() {
@@ -756,4 +893,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initProximityGrids();
   initProjectsCarousel();
   initFormationsReflection();
+  initVeilleMarquee();
+  initCvIconMorph();
 });

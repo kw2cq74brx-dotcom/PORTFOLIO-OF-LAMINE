@@ -2087,6 +2087,30 @@ main > section:not(.hero) {
   justify-content: center;
 }
 
+/* ---- Outils & sources : carrousel horizontal infini (GSAP) ---- */
+.veille-marquee {
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+  padding: 10px 0 18px;
+  perspective: 500px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+
+.veille-tools .veille-marquee-track {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  width: max-content;
+  transform: rotateX(6deg);
+  transform-origin: center top;
+  cursor: default;
+}
+
+.veille-marquee-track span {
+  flex-shrink: 0;
+}
+
 /* --------------------------------------------------------------------------
    19. RESPONSIVE
    -------------------------------------------------------------------------- */
