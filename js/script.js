@@ -23,7 +23,8 @@ const CONFIG = {
   website: "https://votre-site-vitrine.com",
 
   mdsAvisUrl: "https://mds-avis-frontend.vercel.app",
-  pythonProjectUrl: "https://github.com/votre-compte/projet-python"
+  pythonProjectUrl: "https://github.com/votre-compte/projet-python",
+  modelMapUrl: "https://modelsmap-web.onrender.com"
 };
 
 CONFIG.emailHref = `mailto:${CONFIG.email}`;
