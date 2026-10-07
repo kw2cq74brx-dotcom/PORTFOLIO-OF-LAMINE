@@ -473,6 +473,13 @@
           imposé par la circulaire nationale d'organisation du BTS SIO — une ligne par situation.</p>
       </div>
 
+      <div class="synthese-filters" data-reveal>
+        <button type="button" class="synthese-filter active" data-filter="all">Toutes les situations</button>
+        <button type="button" class="synthese-filter" data-filter="bloc1">Bloc 1 — Support</button>
+        <button type="button" class="synthese-filter" data-filter="bloc2">Bloc 2 — Développement</button>
+        <button type="button" class="synthese-filter" data-filter="transversal">Transversal</button>
+      </div>
+
       <div class="synthese-table-wrap" data-reveal>
         <table class="synthese-table">
           <thead>
@@ -486,66 +493,69 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr data-bloc="bloc1" data-target="#experiences" title="Voir cette situation dans Expériences">
               <td>1</td>
               <td>Stage technique — développement &amp; support informatique</td>
               <td>PRIMA FRAIS, Paris</td>
               <td>Stage</td>
-              <td>Bloc 1 — Support et mise à disposition de services informatiques</td>
+              <td><span class="bloc-badge bloc-1">Bloc 1 — Support</span></td>
               <td>Outils internes, documentation technique, support utilisateurs</td>
             </tr>
-            <tr>
+            <tr data-bloc="transversal" data-target="#experiences" title="Voir cette situation dans Expériences">
               <td>2</td>
               <td>Ateliers de professionnalisation</td>
               <td>My Digital School, Paris</td>
               <td>Ateliers de professionnalisation</td>
-              <td>Bloc transversal — Gestion de projet & communication professionnelle</td>
+              <td><span class="bloc-badge bloc-transversal">Transversal — Gestion de projet</span></td>
               <td>Livrables de projet, présentations orales</td>
             </tr>
-            <tr>
+            <tr data-bloc="bloc2" data-target="#experiences" title="Voir cette situation dans Expériences">
               <td>3</td>
               <td>Développeur web indépendant</td>
               <td>Missions personnelles, à distance</td>
               <td>Freelance</td>
-              <td>Bloc 2 — Conception et développement d'applications</td>
+              <td><span class="bloc-badge bloc-2">Bloc 2 — Développement</span></td>
               <td>Sites web livrés à des clients</td>
             </tr>
-            <tr>
+            <tr data-bloc="bloc2" data-target="#projets" title="Voir cette situation dans Projets">
               <td>4</td>
               <td>Conception et développement — MDS Avis</td>
               <td>My Digital School / projet personnel</td>
               <td>Projet académique</td>
-              <td>Bloc 2 — Conception et développement d'applications</td>
+              <td><span class="bloc-badge bloc-2">Bloc 2 — Développement</span></td>
               <td>Application déployée (Next.js, Prisma, Tailwind CSS)</td>
             </tr>
-            <tr>
+            <tr data-bloc="bloc2" data-target="#projets" title="Voir cette situation dans Projets">
               <td>5</td>
               <td>Conception et développement — Application de gestion en Python</td>
               <td>Projet académique, BTS SIO SLAM</td>
               <td>Projet académique</td>
-              <td>Bloc 2 — Conception et développement d'applications</td>
+              <td><span class="bloc-badge bloc-2">Bloc 2 — Développement</span></td>
               <td>Code source, documentation technique</td>
             </tr>
-            <tr>
+            <tr data-bloc="bloc2" data-target="#projets" title="Voir cette situation dans Projets">
               <td>6</td>
               <td>Conception et développement — MODEL'S MAP</td>
               <td>Projet personnel</td>
               <td>Projet personnel</td>
-              <td>Bloc 2 — Conception et développement d'applications</td>
+              <td><span class="bloc-badge bloc-2">Bloc 2 — Développement</span></td>
               <td>Application déployée (modelsmap-web.onrender.com)</td>
             </tr>
-            <tr>
+            <tr data-bloc="transversal" data-target="#veille" title="Voir cette situation dans Veille Informatique">
               <td>7</td>
               <td>Veille technologique et informationnelle</td>
               <td>Autoformation continue</td>
               <td>Continu</td>
-              <td>Bloc transversal — Veille technologique</td>
+              <td><span class="bloc-badge bloc-transversal">Transversal — Veille</span></td>
               <td>Synthèses de veille, sources suivies</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <span class="synthese-hint">Faites glisser horizontalement pour voir tout le tableau</span>
+      <div class="synthese-hints">
+        <span class="synthese-hint">Cliquez sur une ligne pour voir la situation en détail</span>
+        <span class="synthese-hint synthese-hint-scroll">Faites glisser horizontalement pour voir tout le tableau</span>
+      </div>
     </div>
   </section>
 

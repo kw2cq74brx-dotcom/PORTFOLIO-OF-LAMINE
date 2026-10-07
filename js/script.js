@@ -856,6 +856,36 @@ function initCvIconMorph() {
 }
 
 /* --------------------------------------------------------------------------
+   14.11 TABLEAU DE SYNTHÈSE — FILTRES + LIGNES CLIQUABLES
+   -------------------------------------------------------------------------- */
+function initSynthesisTable() {
+  const section = document.getElementById("synthese");
+  if (!section) return;
+
+  const filterBtns = Array.from(section.querySelectorAll(".synthese-filter"));
+  const rows = Array.from(section.querySelectorAll(".synthese-table tbody tr"));
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const filter = btn.dataset.filter;
+      rows.forEach((row) => {
+        row.classList.toggle("is-hidden", filter !== "all" && row.dataset.bloc !== filter);
+      });
+    });
+  });
+
+  rows.forEach((row) => {
+    row.addEventListener("click", () => {
+      const target = row.dataset.target && document.querySelector(row.dataset.target);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
    15. CURSOR HOVER STATE
    -------------------------------------------------------------------------- */
 function initCursorHoverState() {
@@ -896,4 +926,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initFormationsReflection();
   initVeilleMarquee();
   initCvIconMorph();
+  initSynthesisTable();
 });

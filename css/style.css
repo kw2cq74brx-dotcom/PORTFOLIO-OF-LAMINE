@@ -1225,22 +1225,99 @@ main > section:not(.hero) {
   border-bottom: none;
 }
 
+.synthese-table tbody tr {
+  cursor: pointer;
+  transition: background-color .25s ease;
+}
+
 .synthese-table tbody tr:hover td {
   background: rgba(255,255,255,.03);
   color: var(--text-primary);
 }
 
-.synthese-hint {
+.synthese-table tbody tr.is-hidden {
   display: none;
+}
+
+/* ---- Filtres par bloc de compétences ---- */
+.synthese-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.synthese-filter {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  padding: 9px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--border-soft);
+  background: rgba(255,255,255,.02);
+  color: var(--text-secondary);
+  transition: border-color .3s ease, color .3s ease, background-color .3s ease, transform .3s ease;
+}
+
+.synthese-filter:hover {
+  color: var(--text-primary);
+  border-color: rgba(199,196,255,.4);
+}
+
+.synthese-filter.active {
+  background: var(--gradient-btn);
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ---- Badges de bloc de compétences (colonne Compétences mobilisées) ---- */
+.bloc-badge {
+  display: inline-block;
+  font-size: .76rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.bloc-badge.bloc-1 {
+  background: rgba(59,130,255,.12);
+  color: #3B9EFF;
+}
+
+.bloc-badge.bloc-2 {
+  background: rgba(36,107,255,.12);
+  color: var(--accent-blue-2);
+}
+
+.bloc-badge.bloc-transversal {
+  background: rgba(124,58,237,.14);
+  color: var(--accent-violet-2);
+}
+
+/* ---- Indices d'utilisation ---- */
+.synthese-hints {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   margin-top: 14px;
+}
+
+.synthese-hint {
   font-family: var(--font-mono);
   font-size: .68rem;
   letter-spacing: .04em;
   color: var(--text-muted);
 }
 
+.synthese-hint-scroll {
+  display: none;
+}
+
 @media (max-width: 960px) {
-  .synthese-hint { display: block; }
+  .synthese-hint-scroll { display: block; }
 }
 
 /* --------------------------------------------------------------------------
