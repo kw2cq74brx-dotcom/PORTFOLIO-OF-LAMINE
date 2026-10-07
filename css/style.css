@@ -830,6 +830,38 @@ main > section:not(.hero) {
 }
 
 /* --------------------------------------------------------------------------
+   8.5 PROGRAMME — DÉCOUVRIR LE BTS SIO SLAM
+   -------------------------------------------------------------------------- */
+.programme-subjects {
+  margin-top: 40px;
+  padding: 30px 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft);
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+}
+
+.programme-subjects h4 {
+  font-family: var(--font-display);
+  font-size: .85rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-lavender);
+  margin-bottom: 20px;
+}
+
+.programme-outro {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+@media (max-width: 720px) {
+  .programme-outro { grid-template-columns: 1fr; }
+}
+
+/* --------------------------------------------------------------------------
    9. ABOUT
    -------------------------------------------------------------------------- */
 .about .container {
