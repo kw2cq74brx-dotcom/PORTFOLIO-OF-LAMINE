@@ -163,6 +163,7 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
   line-height: 1.05;
   letter-spacing: -0.01em;
+  overflow-wrap: break-word;
 }
 
 .eyebrow {
@@ -303,7 +304,15 @@ main > section:not(.hero) {
   transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, background .35s ease, border-color .35s ease;
 }
 
-.btn svg { width: 16px; height: 16px; transition: transform .35s ease; }
+.btn svg { width: 16px; height: 16px; transition: transform .35s ease; flex-shrink: 0; }
+
+@media (max-width: 600px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
+  }
+}
 
 .btn-primary {
   background: var(--gradient-btn);
@@ -1602,6 +1611,7 @@ main > section:not(.hero) {
   position: relative;
   width: 100%;
   max-width: 640px;
+  overflow-x: hidden;
   perspective: 1400px;
   touch-action: pan-y;
   cursor: grab;
