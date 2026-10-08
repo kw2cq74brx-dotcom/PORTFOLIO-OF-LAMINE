@@ -108,34 +108,84 @@ function initHeader() {
 }
 
 /* --------------------------------------------------------------------------
-   5. MOBILE NAVIGATION
+   5. NAVIGATION DROPDOWN
+   Link entrance adapted from "Creating a Thumbnail Flow Animation with GSAP
+   MotionPath" (Codrops, Iqbal Muthahhary): each item starts stacked on the
+   first link, then flies out to its grid position along a short curved
+   motion path (a waypoint + a destination) instead of a straight tween,
+   staggered so the whole menu unfurls organically.
    -------------------------------------------------------------------------- */
-function initMobileNav() {
-  const toggle = document.getElementById("navToggle");
-  const mobileNav = document.getElementById("navMobile");
+function initNavDropdown() {
+  const logo = document.getElementById("logoLink");
+  const panel = document.getElementById("navDropdownPanel");
   const scrim = document.getElementById("navScrim");
-  const links = mobileNav.querySelectorAll("a");
+  const links = Array.from(panel.querySelectorAll("a"));
+
+  const hasMotionPath = typeof gsap !== "undefined" && typeof MotionPathPlugin !== "undefined";
+  if (hasMotionPath) gsap.registerPlugin(MotionPathPlugin);
+
+  function playFlowIn() {
+    const originRect = links[0].getBoundingClientRect();
+
+    links.forEach((link, i) => {
+      const r = link.getBoundingClientRect();
+      const dx = originRect.left - r.left;
+      const dy = originRect.top - r.top;
+
+      gsap.killTweensOf(link);
+      // Start stacked on the first link (like the thumbnails in the source
+      // demo), then let motionPath carry it back to its natural grid spot
+      // via a curved 2-point path instead of a straight line. MotionPath
+      // reads these x/y pairs as absolute tween targets (exactly like a
+      // plain gsap.to x/y), not deltas from the current position.
+      gsap.set(link, { x: dx, y: dy, scale: 0.4, opacity: 0 });
+      gsap.to(link, {
+        motionPath: {
+          path: [
+            { x: dx * 0.25, y: dy * 0.55, scale: 0.8 },
+            { x: 0, y: 0, scale: 1 }
+          ],
+          curviness: 0.45
+        },
+        opacity: 1,
+        duration: 0.9,
+        ease: "expo.inOut",
+        delay: i * 0.025,
+        clearProps: "transform"
+      });
+    });
+  }
 
   function closeNav() {
-    toggle.classList.remove("active");
-    mobileNav.classList.remove("open");
+    logo.classList.remove("active");
+    logo.setAttribute("aria-expanded", "false");
+    panel.classList.remove("open");
     scrim.classList.remove("visible");
-    document.body.classList.remove("no-scroll");
   }
 
   function openNav() {
-    toggle.classList.add("active");
-    mobileNav.classList.add("open");
+    logo.classList.add("active");
+    logo.setAttribute("aria-expanded", "true");
+    panel.classList.add("open");
     scrim.classList.add("visible");
-    document.body.classList.add("no-scroll");
+    if (hasMotionPath) playFlowIn();
   }
 
-  toggle.addEventListener("click", () => {
-    mobileNav.classList.contains("open") ? closeNav() : openNav();
+  function toggleNav() {
+    panel.classList.contains("open") ? closeNav() : openNav();
+  }
+
+  logo.addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleNav();
   });
 
   scrim.addEventListener("click", closeNav);
   links.forEach((link) => link.addEventListener("click", closeNav));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeNav();
+  });
 }
 
 /* --------------------------------------------------------------------------
@@ -909,7 +959,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPreloader();
   initCursor();
   initHeader();
-  initMobileNav();
+  initNavDropdown();
   initTypedRole();
   initScrollReveal();
   initCounters();
