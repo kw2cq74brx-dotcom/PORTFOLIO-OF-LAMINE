@@ -718,53 +718,44 @@ function initProjectsCarousel() {
 }
 
 /* --------------------------------------------------------------------------
-   14.7 FORMATIONS — REFLECTION SCROLL EFFECT
-   Adapted from codrops/ReflectionScroll (tympanus.net), scaled down from a
-   full-page mirrored scroll strip (which relies on Lenis + a fixed,
-   viewport-height flipped wrapper) to a self-contained per-card reflection,
-   so it doesn't take over scrolling for the rest of the site.
+   14.7 FORMATIONS — ARBRE CHRONOLOGIQUE
+   Ligne centrale qui se dessine au scroll + cartes qui glissent depuis leur
+   côté (gauche/droite en alternance sur desktop, gauche sur mobile), le
+   point de la timeline apparaissant juste avant sa carte.
    -------------------------------------------------------------------------- */
-function initFormationsReflection() {
+function initFormationsTimeline() {
+  const container = document.querySelector("#formations .timeline");
+  const items = document.querySelectorAll("#formations .timeline-item");
+  if (!container || !items.length) return;
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
-  if (window.matchMedia("(hover: none)").matches) return;
-  if (window.matchMedia("(max-width: 900px)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   gsap.registerPlugin(ScrollTrigger);
 
-  document.querySelectorAll("#formations .timeline-item").forEach((item) => {
+  const isZigzag = window.matchMedia("(min-width: 901px)").matches;
+
+  if (isZigzag) {
+    gsap.fromTo(container, { "--line-progress": 0 }, {
+      "--line-progress": 1,
+      ease: "none",
+      scrollTrigger: { trigger: container, start: "top 75%", end: "bottom 85%", scrub: 0.6 }
+    });
+  }
+
+  items.forEach((item, i) => {
     const card = item.querySelector(".timeline-card");
-    if (!card) return;
+    const dot = item.querySelector(".timeline-dot");
+    if (!card || !dot) return;
 
-    const clone = card.cloneNode(true);
-    clone.setAttribute("aria-hidden", "true");
-    clone.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
-
-    const flip = document.createElement("div");
-    flip.className = "tl-reflection-flip";
-    flip.appendChild(clone);
-
-    const wrap = document.createElement("div");
-    wrap.className = "tl-reflection-wrap";
-    wrap.appendChild(flip);
-
-    item.appendChild(wrap);
+    const fromRight = isZigzag && i % 2 === 1;
+    gsap.set(card, { autoAlpha: 0, x: fromRight ? 32 : -32 });
+    gsap.set(dot, { autoAlpha: 0, scale: .5 });
 
     gsap.timeline({
-      scrollTrigger: {
-        trigger: item,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true
-      }
-    }).fromTo([card, clone], {
-      transformOrigin: "50% 0%",
-      filter: "contrast(105%) brightness(100%)"
-    }, {
-      ease: "power1.in",
-      rotationX: 8,
-      scaleY: 0.96,
-      filter: "contrast(90%) brightness(60%)"
-    }, 0);
+      scrollTrigger: { trigger: item, start: "top 85%", toggleActions: "play none none none" }
+    })
+      .to(dot, { autoAlpha: 1, scale: 1, duration: .4, ease: "back.out(2.6)" })
+      .to(card, { autoAlpha: 1, x: 0, duration: .55, ease: "power3.out" }, "-=0.25");
   });
 }
 
@@ -973,7 +964,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCvDownload();
   initProximityGrids();
   initProjectsCarousel();
-  initFormationsReflection();
+  initFormationsTimeline();
   initVeilleMarquee();
   initCvIconMorph();
   initSynthesisTable();

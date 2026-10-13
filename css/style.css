@@ -1036,38 +1036,59 @@ main > section:not(.hero) {
   transition: border-color .35s ease, transform .35s ease, box-shadow .35s ease;
 }
 
-/* ---- Formations : reflet miroir animé au scroll ---- */
-#formations .timeline-item {
-  perspective: 800px;
+/* ---- Formations : arbre chronologique alterné — adapté de
+   codepen.io/tok124/pen/JoWYJZx (ligne centrale + boîtes alternées),
+   recoloré et simplifié pour rester compatible sans anchor-positioning ---- */
+#formations .timeline {
+  --line-progress: 1;
 }
 
-.tl-reflection-wrap {
-  position: relative;
-  height: 90px;
-  margin-top: -4px;
-  overflow: hidden;
-  pointer-events: none;
-  perspective: 800px;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.45), transparent 78%);
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,.45), transparent 78%);
-}
+@media (min-width: 901px) {
+  #formations .timeline {
+    max-width: 900px;
+    margin-inline: auto;
+  }
 
-.tl-reflection-flip {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  transform: scaleY(-1);
-  transform-origin: top;
-  transform-style: preserve-3d;
-}
+  #formations .timeline::before {
+    left: 50%;
+    transform: translateX(-50%) scaleY(var(--line-progress));
+    transform-origin: top;
+  }
 
-.tl-reflection-flip .timeline-card {
-  opacity: .38;
-  filter: blur(1px);
-  pointer-events: none;
-}
+  #formations .timeline-item {
+    width: 50%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 64px;
+  }
 
-@media (hover: none), (max-width: 900px) {
-  .tl-reflection-wrap { display: none; }
+  #formations .timeline-item:last-child { padding-bottom: 0; }
+
+  #formations .timeline-item:nth-child(odd) { padding-right: 76px; }
+
+  #formations .timeline-item:nth-child(even) {
+    margin-left: 50%;
+    padding-left: 76px;
+  }
+
+  #formations .timeline-dot { left: auto; }
+
+  #formations .timeline-item:nth-child(odd) .timeline-dot { right: -28px; }
+
+  #formations .timeline-item:nth-child(even) .timeline-dot { left: -28px; }
+
+  #formations .timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 27px;
+    width: 48px;
+    height: 2px;
+    background: var(--border-strong);
+  }
+
+  #formations .timeline-item:nth-child(odd)::after { right: 28px; }
+
+  #formations .timeline-item:nth-child(even)::after { left: 28px; }
 }
 
 .timeline-item:hover .timeline-dot {
